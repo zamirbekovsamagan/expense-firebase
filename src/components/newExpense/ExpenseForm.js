@@ -1,5 +1,8 @@
 import { useState } from "react";
 import "./ExpenseForm.css";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 function ExpenseForm(props) {
   const [enteredTitle, setEnteredTitle] = useState("");
   const [enteredAmount, setEnteredAmount] = useState("");
@@ -22,7 +25,7 @@ function ExpenseForm(props) {
     const expenseData = {
       title: enteredTitle,
       amount: enteredAmount,
-      date: new Date(enteredDate),
+      date: enteredDate,
     };
     const response = await fetch('https://expense-tracker-6c84f-default-rtdb.firebaseio.com/expense.json',{
       method: 'POST',
@@ -32,16 +35,16 @@ function ExpenseForm(props) {
           },
     })
     if(response.ok){
-      setSuccess(true)
-      setTimeout(()=>{
-        setSuccess(false)
-      },2000)
+      toast.success('Uspeshno dobavleno',{
+        position: "top-center"
+      })
     }
 
   };
 
   return (
     <form onSubmit={submitHandler}>
+      <ToastContainer/>
       <div className="new-expense__controls">
         <div className="new-expense__control">
           <label>Title</label>
