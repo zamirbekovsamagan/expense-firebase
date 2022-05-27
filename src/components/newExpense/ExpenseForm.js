@@ -7,7 +7,6 @@ function ExpenseForm(props) {
   const [enteredTitle, setEnteredTitle] = useState("");
   const [enteredAmount, setEnteredAmount] = useState("");
   const [enteredDate, setEnteredDate] = useState("");
-  const [succes, setSuccess] = useState(false)
 
   const titleChangeHandler = (event) => {
     setEnteredTitle(event.target.value);
@@ -36,7 +35,9 @@ function ExpenseForm(props) {
     })
     if(response.ok){
       toast.success('Uspeshno dobavleno',{
-        position: "top-center"
+        position: "top-center",
+        theme:"dark",
+        autoClose: 1000
       })
     }
 
@@ -69,7 +70,6 @@ function ExpenseForm(props) {
           />
         </div>
       </div>
-      {succes && <p>Successfully added</p>}
       <div className="new-expense__actions">
         <button>Add Expense</button>
       </div>
